@@ -107,17 +107,17 @@ void KiemTra()
 
 int main()
 {
-	int a[8];
+	int a[7];
 	cout << "Nhap vao cac so trong ve cua ban ";
 	cout << endl;
-	for(int i = 1; i < 8; i++)
+	for(int i = 1; i < 7; i++)
 	{
 		cout << "So thu " << i << " : ";
 		cin >> a[i];
 	}
 	
 	cout << "Day so cua ban la : " << endl;
-	for(int i = 1; i < 8; i++)
+	for(int i = 1; i < 7; i++)
 	{
 		cout << a[i] << " ";
 	}
