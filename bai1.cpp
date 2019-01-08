@@ -103,18 +103,22 @@ void GiaiBa()
 
 void KiemTra()
 {
-	int a[6];
-	cout << "Nhap vao cac so trong ve cua ban ";
-	cout << endl;
-	for(int i = 1; i < 7; i++)
-	{
-		cout << "So thu " << i << " : ";
-		cin >> a[i];
-	}
 }
 
 int main()
 {
+	int a[8];
+	cout << "Nhap vao cac so trong ve cua ban ";
+	cout << endl;
+	for(int i = 1; i < 8; i++)
+	{
+		cout << "So thu " << i << " : ";
+		cin >> a[i];
+	}
+	
+	cout << "\n";
+    cout << "---------------------------------------------------------------" << endl;
+    
     Jackpot1();
     
     cout << "\n";
