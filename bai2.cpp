@@ -112,12 +112,12 @@ void TruMT(int *a, int *b, int *c, int *n, int *m)
 void NhanMT(int *a, int *b, int *c, int *n, int *m)
 {
 	int sum;
-	for (int i = 0; i <= *m-1; i++) 
+	for (int i = 0; i <= *m - 1; i++) 
 	{
-      	for (int j = 0; j <= *n-1; j++) 
+      	for (int j = 0; j <= *n - 1; j++) 
 	  	{
 	  		sum = 0;
-        	for (int k = 0; k <= *n-1; k++) 
+        	for (int k = 0; k <= *n - 1; k++) 
 			{
         		sum +=  *(a + i * (*n) + k) * *(b + k * (*n) + j);
         	}
