@@ -116,6 +116,12 @@ int main()
 		cin >> a[i];
 	}
 	
+	cout << "Day so cua ban la : " << endl;
+	for(int i = 1; i < 8; i++)
+	{
+		cout << a[i] << " ";
+	}
+	
 	cout << "\n";
     cout << "---------------------------------------------------------------" << endl;
     
