@@ -28,19 +28,36 @@ void SapXep(int a[], int b[], int c[], int n)
 			}
 }
 
-void XuatMang(int a[], int n)
+void XepLich(int a[], int b[], int c[], int n)
 {
-	for(int i = 0; i < n; i++)
-		cout << a[i] << " ";
-	cout << endl;
+	f.open("dulieu2.txt", ios::out);
+	SapXep(a, b, c, 5);
+	int t = 0;
+	t = b[0];
+	f << a[0] << " ";
+	for(int i = 0; i < 5; i++)
+	{
+		if(c[i] >= t + b[i])
+		{
+			t += b[i];
+			f << a[i] << " ";
+		}
+	}
+	f.close();
 }
 
-void LuuKQ(int a[], int n)
+void XuatThuTu()
 {
-	f.open("dulieu2.txt", ios::out | ios::app);
-	for(int i = 0; i < n; i++)
-		f << a[i] << " ";
-	f << endl;
+	cout << "Thu tu sua chua oto dung han :" << endl;
+	string s;
+	ifstream f("dulieu2.txt");
+	getline(f, s);
+	do
+	{
+		cout << s << endl;
+		getline(f, s);
+	}
+	while(f.eof()==false);
 	f.close();
 }
 
@@ -49,16 +66,7 @@ int main()
 	int a[20], b[20], c[20];
 	
 	DocFile(a, b, c);
-
-	cout << "Thu tu sua chua o to de giao dung han " << endl;
-	cout << endl;
 	
-	SapXep(a, b, c, 5);
-	XuatMang(a, 5);
-	LuuKQ(a, 5);
-	XuatMang(b, 5);
-	LuuKQ(b, 5);
-	XuatMang(c, 5);
-	LuuKQ(c, 5); 
-	
+	XepLich(a, b, c, 5);
+	XuatThuTu();
 }
