@@ -104,24 +104,12 @@ void GiaiBa()
 void KiemTra()
 {
 	int a[6];
-	int t = rand() % 56;
 	cout << "Nhap vao cac so trong ve cua ban ";
 	cout << endl;
 	for(int i = 1; i < 7; i++)
 	{
 		cout << "So thu " << i << " : ";
 		cin >> a[i];
-	}
-	int ve[6], kq[6];
-	int flag = 0;
-	int d = 0;
-	for (int i = 0; i < 6; i++)
-	{
-    	for (int j = 0; j < 6; j++)
-    		if (ve[i] == kq[j])
-        		flag=1;
-    		if (flag == 1) 
-				d++;
 	}
 }
 
