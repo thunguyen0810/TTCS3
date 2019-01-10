@@ -3,6 +3,7 @@
 #include <string.h>
 #include <stdlib.h>
 #include <vector>
+#include <Windows.h> 
 using namespace std;
 
 fstream f1 ("NVVP.txt");
@@ -12,6 +13,13 @@ const int dinhmucvang = 10;
 const int giaphat = 50000;
 const int dinhmucsp = 200;
 const int dongiasp = 100000;
+
+void textcolor(int x)
+{
+	HANDLE mau;
+	mau=GetStdHandle(STD_OUTPUT_HANDLE);
+	SetConsoleTextAttribute(mau,x);
+}
 
 class NV
 {
@@ -115,8 +123,7 @@ class NVVP : public NV
 		int TinhLuong()
 		{
 			return lcb * hsl - TinhPhat();
-		}
-		
+		}		
 		void XuatNVVP()
 		{
 			NV :: XuatNV();
@@ -190,7 +197,7 @@ class NVSX : public NV
 		}
 };
 
-class DSNVVP
+class DSNVVP : public NVVP
 {
 	int n; 
 	vector<NVVP> dsnvvp;
@@ -213,39 +220,24 @@ class DSNVVP
 			f1.close();				
 		}
 		
+		int TinhLuongTB()
+		{
+			int tong = 0;
+			for (int i = 0; i < dsnvvp.size(); i++) 
+			{
+				tong += dsnvvp[i].TinhLuong();
+			}
+			return tong/dsnvvp.size();
+		}
+		
 		void Xuatdsvp() 
 		{
 			for (int i = 0; i < dsnvvp.size(); i++) 
 			{
 				dsnvvp[i].XuatNVVP();
 			}
-		}	
-		
-		void Themnvvp()
-		{
-			string s;
-			getline(f1, s); 
-			n = atoi(s.c_str()); 
-			dsnvvp.resize(n); 
-			
-			NVVP tam;
-			tam.NhapVP();
-			ofstream f;
-		   		f.open("NVVP.txt", ios::app);
-		   	for(int i = 0; i < dsnvvp.size(); i++)
-			{
-				if(i == 0) 
-					f << dsnvvp[i].hoten << endl;
-				else
-					f << endl << dsnvvp[i].hoten << endl;
-					f << dsnvvp[i].gioitinh << endl;
-					f << dsnvvp[i].namvaolam << endl;
-					f << dsnvvp[i].hsl << endl;
-					f << dsnvvp[i].socon << endl;
-					f << dsnvvp[i].lcb << endl;
-					f << dsnvvp[i].songayvang << endl;
-			}	
-		}
+			cout << "Luong trung binh cua nhan vien van phong : " << TinhLuongTB();
+		}		
 };
 
 class DSNVSX
@@ -279,33 +271,6 @@ class DSNVSX
 			{
 				dsnvsx[i].XuatNVSX();
 			}
-		}
-		
-		void Themnvsx()
-		{
-			string s;
-			getline(f2, s); 
-			n = atoi(s.c_str()); 
-			dsnvsx.resize(n); 
-			
-			NVSX tam;
-			tam.NhapSX();
-			dsnvsx.push_back(tam);
-			ofstream f;
-		   	f.open("NVSX.txt", ios::app);
-		   	for(int i = 0; i < dsnvsx.size(); i++)
-			{
-				if(i == 0) 
-					f << dsnvsx[i].hoten << endl;
-				else
-					f << endl << dsnvsx[i].hoten << endl;
-					f << dsnvsx[i].gioitinh << endl;
-					f << dsnvsx[i].namvaolam << endl;
-					f << dsnvsx[i].hsl << endl;
-					f << dsnvsx[i].socon << endl;
-					f << dsnvsx[i].lcb << endl;
-					f << dsnvsx[i].sosp;
-			}		
 		}	
 };
 
@@ -320,12 +285,16 @@ int main()
 	NVSX nvsx;
 	do
 	{
+		textcolor(11);
 		cout << "\t\t\t ============================MENU================\n";
 		cout << "\t\t\t |1. Nhan vien van phong                        |\n";
 		cout << "\t\t\t |2. Nhan vien san xuat                         |\n";
 		cout << "\t\t\t |3. Thoat                                      |\n";
 		cout << "\t\t\t ================================================\n";
+		textcolor(15);
+		textcolor(12);
 		cout << "Ban chon chuc nang so : ";
+		textcolor(15);
 		cin >> chon;
 		
 		switch(chon)
@@ -333,12 +302,17 @@ int main()
 			case 1:
 				do
 				{
+					cout << endl;
+					textcolor(14);
 					cout << "\t\t\t ============================MENU================\n";
 					cout << "\t\t\t |1. Nhap thong tin nhan vien van phong         |\n";
 					cout << "\t\t\t |2. Xem danh sach nhan vien van phong          |\n";
-					cout << "\t\t\t |3. Thoat                                      |\n";
+					cout << "\t\t\t |0. Thoat                                      |\n";
 					cout << "\t\t\t ================================================\n";
+					textcolor(15);
+					textcolor(12);
 					cout << "Ban chon chuc nang so : ";
+					textcolor(15);
 					cin >> chon1;
 					switch(chon1)
 					{
@@ -356,20 +330,25 @@ int main()
 							vp.Nhapdsvp();
 							vp.Xuatdsvp();
 							break;
-						case 3:
+						case 0 : 
 							break;
 					}
 				}
-				while(chon1 != 3);
+				while(chon1);
 			case 2:
 				do
 				{
+					cout << endl;
+					textcolor(13);
 					cout << "\t\t\t ============================MENU================\n";
 					cout << "\t\t\t |1. Nhap thong tin nhan vien san xuat          |\n";
 					cout << "\t\t\t |2. Xem danh sach nhan vien san xuat           |\n";
 					cout << "\t\t\t |3. Thoat                                      |\n";
 					cout << "\t\t\t ================================================\n";
+					textcolor(15);
+					textcolor(12);
 					cout << "Ban chon chuc nang so : ";
+					textcolor(15);
 					cin >> chon2;
 					switch(chon2)
 					{
@@ -383,7 +362,7 @@ int main()
 							nvsx.XuatNVSX();
 							break;
 						case 2:
-							sx.Themnvsx();
+							sx.Nhapdssx();
 							sx.Xuatdssx();
 						case 3:
 							break;
