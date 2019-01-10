@@ -285,18 +285,21 @@ int main()
 	NVSX nvsx;
 	do
 	{
-		textcolor(11);
-		cout << "\t\t\t ============================MENU================\n";
-		cout << "\t\t\t |1. Nhan vien van phong                        |\n";
-		cout << "\t\t\t |2. Nhan vien san xuat                         |\n";
-		cout << "\t\t\t |3. Thoat                                      |\n";
-		cout << "\t\t\t ================================================\n";
-		textcolor(15);
-		textcolor(12);
-		cout << "Ban chon chuc nang so : ";
-		textcolor(15);
-		cin >> chon;
-		
+		Menu :
+		{
+			textcolor(11);
+			cout << "\t\t\t ============================MENU================\n";
+			cout << "\t\t\t |1. Nhan vien van phong                        |\n";
+			cout << "\t\t\t |2. Nhan vien san xuat                         |\n";
+			cout << "\t\t\t |3. Thoat                                      |\n";
+			cout << "\t\t\t ================================================\n";
+			textcolor(15);
+			textcolor(12);
+			cout << "Ban chon chuc nang so : ";
+			textcolor(15);
+			cin >> chon;
+		}
+	
 		switch(chon)
 		{
 			case 1:
@@ -307,7 +310,7 @@ int main()
 					cout << "\t\t\t ============================MENU================\n";
 					cout << "\t\t\t |1. Nhap thong tin nhan vien van phong         |\n";
 					cout << "\t\t\t |2. Xem danh sach nhan vien van phong          |\n";
-					cout << "\t\t\t |0. Thoat                                      |\n";
+					cout << "\t\t\t |3. Thoat                                      |\n";
 					cout << "\t\t\t ================================================\n";
 					textcolor(15);
 					textcolor(12);
@@ -330,11 +333,12 @@ int main()
 							vp.Nhapdsvp();
 							vp.Xuatdsvp();
 							break;
-						case 0 : 
+						case 3:
+							goto Menu;
 							break;
 					}
 				}
-				while(chon1);
+				while(chon1 != 3);
 			case 2:
 				do
 				{
@@ -365,6 +369,7 @@ int main()
 							sx.Nhapdssx();
 							sx.Xuatdssx();
 						case 3:
+							goto Menu;
 							break;
 					}
 				}
@@ -374,5 +379,4 @@ int main()
 		}
 	}
 	while(chon != 3);
-	return 0;
 }
