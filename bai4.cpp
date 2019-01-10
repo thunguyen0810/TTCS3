@@ -1,8 +1,16 @@
-#include<iostream>
-#include<fstream>
+#include <iostream>
+#include <fstream>
+#include <windows.h>
 using namespace std;
 
 fstream f;
+
+void textcolor(int x)
+{
+	HANDLE mau;
+	mau=GetStdHandle(STD_OUTPUT_HANDLE);
+	SetConsoleTextAttribute(mau,x);
+}
 
 void DocFile(int a[],int b[],int c[])
 {
@@ -48,13 +56,17 @@ void XepLich(int a[], int b[], int c[], int n)
 
 void XuatThuTu()
 {
-	cout << "Thu tu sua chua oto dung han :" << endl;
+	textcolor(10);
+	cout << "\t\tThu tu sua chua oto dung han :" << endl;
+	textcolor(15);
 	string s;
 	ifstream f("dulieu2.txt");
 	getline(f, s);
 	do
 	{
-		cout << s << endl;
+		textcolor(11);
+		cout << "\t\t\t" << s << endl;
+		textcolor(15);
 		getline(f, s);
 	}
 	while(f.eof()==false);
