@@ -2,22 +2,36 @@
 #include<fstream>
 #include <stdlib.h>
 #include <string.h>
+#include <windows.h>
 using namespace std;
 
 fstream f;
 
+void textcolor(int x)
+{
+	HANDLE mau;
+	mau=GetStdHandle(STD_OUTPUT_HANDLE);
+	SetConsoleTextAttribute(mau,x);
+}
+
 void NhapMT(int *a, int *b, int *n, int *m)
 {
+	textcolor(10);
 	cout << "Nhap m : ";
+	textcolor(15);
 	cin >> *m;
 	
 	cout << endl;
 	
+	textcolor(10);
 	cout << "Nhap n : ";
+	textcolor(15);
 	cin >> *n;
 	
 	f.open("input2.txt", ios::out);
+	textcolor(14);
 	cout << "Nhap cac phan tu trong ma tran 1: " << endl;
+	textcolor(15);
 	cout << endl;
 	
 	for(int i = 0; i < *m; i++)
@@ -31,7 +45,9 @@ void NhapMT(int *a, int *b, int *n, int *m)
 		f << endl;
 	}
 	f << endl;
+	textcolor(14);
 	cout << "Nhap cac phan tu trong ma tran 2: " << endl;
+	textcolor(15);
 	cout << endl;
 	for(int i = 0; i < *m; i++)
 	{
@@ -92,7 +108,9 @@ void CongMT(int *a, int *b, int *c, int *n, int *m)
             *(c + i * (*n) + j) = *(a + i * (*n) + j) + *(b + i * (*n) + j);
         }
     }
+    textcolor(12);
     cout << "Hay mo file ouput2.txt de xem ket qua !\n";
+    textcolor(15);
     cout << endl;
 }
 
@@ -105,7 +123,9 @@ void TruMT(int *a, int *b, int *c, int *n, int *m)
             *(c + i * (*n) + j) = *(a + i * (*n) + j) - *(b + i * (*n) + j);
         }
     }
+    textcolor(12);
     cout << "Hay mo file ouput2.txt de xem ket qua !\n";
+    textcolor(15);
     cout << endl;
 }
 
@@ -124,7 +144,9 @@ void NhanMT(int *a, int *b, int *c, int *n, int *m)
         	*(c + i * (*n) + j) = sum;
       	}
    	}
+   	textcolor(14);
    	cout << "Hay mo file ouput2.txt de xem ket qua !";
+   	textcolor(15);
    	cout << endl;
 }
 
@@ -135,6 +157,7 @@ int main()
 	
 	do
 	{
+		textcolor(11);
 		cout << "\t\t\t ============================MENU================\n";
 		cout << "\t\t\t |1. Nhap 2 ma tran                             |\n";
 		cout << "\t\t\t |2. Cong 2 ma tran                             |\n";
@@ -142,7 +165,10 @@ int main()
 		cout << "\t\t\t |4. Nhan 2 ma tran                             |\n";
 		cout << "\t\t\t |5. Thoat                                      |\n";
 		cout << "\t\t\t ================================================\n";
+		textcolor(15);
+		textcolor(10);
 		cout << "Ban chon chuc nang so : ";
+		textcolor(15);
 		cin >> chon;
 		
 		switch(chon)
