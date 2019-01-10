@@ -26,7 +26,7 @@ class NV
 		void NhapNV()
 		{
 			cout << "Nhap ten nhan vien : ";
-			getline(std :: cin, hoten);
+			cin >> hoten;
 			fflush(stdin);
 			cout << "Nhap gioi tinh (Neu la nu nhap 1, nam nhap 0) : ";
 			cin >> gioitinh;
@@ -55,7 +55,7 @@ class NV
 				cout << "Gioi tinh : Nu" << endl;
 			else
 			cout << "Gioi tinh : Nam" << endl;
-			cout << "Nam nhan vien vao lam : " << endl;
+			cout << "Nam nhan vien vao lam : " << namvaolam << endl;
 			cout << "He so luong : " << hsl << endl;
 			cout << "So con : " << socon << endl;
 			cout << "Luong co ban : " << lcb << endl;
@@ -68,7 +68,7 @@ class NVVP : public NV
 	public:
 		int songayvang;
 		
-		void Nhap()
+		void NhapVP()
 		{
 			NV :: NhapNV();
 			cout << "Nhap so ngay nhan vien vang : ";
@@ -133,7 +133,7 @@ class NVSX : public NV
 {
 	public:
 		int sosp;
-		void Nhap()
+		void NhapSX()
 		{
 			NV :: NhapNV();
 			cout << "Nhap so san pham nhan vien lam duoc trong thang nay : ";
@@ -160,7 +160,7 @@ class NVSX : public NV
 			sosp = atoi(s.c_str());
 		}
 		
-		int TinhThuong()
+		int TinhThuong1()
 		{
 			if(sosp > dinhmucsp)
 				return (sosp - dinhmucsp) * dongiasp * 0.03;
@@ -229,7 +229,7 @@ class DSNVVP
 			dsnvvp.resize(n); 
 			
 			NVVP tam;
-			tam.Nhap();
+			tam.NhapVP();
 			ofstream f;
 		   		f.open("NVVP.txt", ios::app);
 		   	for(int i = 0; i < dsnvvp.size(); i++)
@@ -289,7 +289,7 @@ class DSNVSX
 			dsnvsx.resize(n); 
 			
 			NVSX tam;
-			tam.Nhap();
+			tam.NhapSX();
 			dsnvsx.push_back(tam);
 			ofstream f;
 		   	f.open("NVSX.txt", ios::app);
@@ -313,13 +313,16 @@ int main()
 {
 	int chon = 0;
 	int chon1 = 0;
+	int chon2 = 0;
 	DSNVVP vp;
 	DSNVSX sx;
+	NVVP nvvp;
+	NVSX nvsx;
 	do
 	{
 		cout << "\t\t\t ============================MENU================\n";
-		cout << "\t\t\t |1. Danh sach nhan vien van phong              |\n";
-		cout << "\t\t\t |2. Danh sach nhan vien san xuat               |\n";
+		cout << "\t\t\t |1. Nhan vien van phong                        |\n";
+		cout << "\t\t\t |2. Nhan vien san xuat                         |\n";
 		cout << "\t\t\t |3. Thoat                                      |\n";
 		cout << "\t\t\t ================================================\n";
 		cout << "Ban chon chuc nang so : ";
@@ -328,56 +331,66 @@ int main()
 		switch(chon)
 		{
 			case 1:
-				vp.Nhapdsvp();
-				vp.Xuatdsvp();
 				do
 				{
 					cout << "\t\t\t ============================MENU================\n";
-					cout << "\t\t\t |1. Nhap them nhan vien van phong              |\n";
-					cout << "\t\t\t |2. Thoat                                      |\n";
+					cout << "\t\t\t |1. Nhap thong tin nhan vien van phong         |\n";
+					cout << "\t\t\t |2. Xem danh sach nhan vien van phong          |\n";
+					cout << "\t\t\t |3. Thoat                                      |\n";
 					cout << "\t\t\t ================================================\n";
 					cout << "Ban chon chuc nang so : ";
 					cin >> chon1;
 					switch(chon1)
 					{
 						case 1:
-							vp.Themnvvp();
+							fflush(stdin);
+							nvvp.NhapVP();
+							nvvp.TinhLuong();
+							nvvp.TinhThuong();
+							nvvp.TinhPhat();
+							nvvp.TinhTroCap();
+							nvvp.XuatNV();
+							nvvp.XuatNVVP();
+							break;
+						case 2:
+							vp.Nhapdsvp();
 							vp.Xuatdsvp();
 							break;
-						case 2:
+						case 3:
 							break;
 					}
 				}
-				while(chon1 != 2);
-				break;
+				while(chon1 != 3);
 			case 2:
-				sx.Nhapdssx();
-				sx.Xuatdssx();
 				do
 				{
 					cout << "\t\t\t ============================MENU================\n";
-					cout << "\t\t\t |1. Nhap them nhan vien san xuat               |\n";
-					cout << "\t\t\t |2. Thoat                                      |\n";
+					cout << "\t\t\t |1. Nhap thong tin nhan vien san xuat          |\n";
+					cout << "\t\t\t |2. Xem danh sach nhan vien san xuat           |\n";
+					cout << "\t\t\t |3. Thoat                                      |\n";
 					cout << "\t\t\t ================================================\n";
 					cout << "Ban chon chuc nang so : ";
-					cin >> chon1;
-					switch(chon1)
+					cin >> chon2;
+					switch(chon2)
 					{
 						case 1:
-							sx.Themnvsx();
-							sx.Xuatdssx();
+							fflush(stdin);
+							nvsx.NhapSX();
+							nvsx.TinhLuong();
+							nvsx.TinhThuong1();
+							nvsx.TinhTroCap();
+							nvsx.XuatNV();
+							nvsx.XuatNVSX();
 							break;
 						case 2:
+							sx.Themnvsx();
+							sx.Xuatdssx();
+						case 3:
 							break;
 					}
 				}
-				while(chon1 != 2);	
-				break;
+				while(chon2 != 3);
 			case 3:
-				break;
-			default:
-				cout << "Ban chon sai ! Moi ban chon lai MENU \n";
-				cout << endl;
 				break;
 		}
 	}
