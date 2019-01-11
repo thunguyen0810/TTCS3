@@ -13,6 +13,7 @@ const int dinhmucvang = 10;
 const int giaphat = 50000;
 const int dinhmucsp = 200;
 const int dongiasp = 100000;
+const int lcb = 5000000;
 
 void textcolor(int x)
 {
@@ -29,7 +30,7 @@ class NV
 		int namvaolam;
 		float hsl;
 		int socon;
-		int lcb;
+	
 		
 		void NhapNV()
 		{
@@ -44,8 +45,6 @@ class NV
 			cin >> hsl;
 			cout << "Nhap so con : ";
 			cin >> socon;
-			cout << "Nhap luong co ban : ";
-			cin >> lcb;
 		}
 		
 		int TinhThuong()
@@ -98,8 +97,6 @@ class NVVP : public NV
 			hsl = atoi(s.c_str());
 			getline(f1, s);
 			socon = atoi(s.c_str());
-			getline(f1, s);
-			lcb = atoi(s.c_str());
 			getline(f1, s);
 			songayvang = atoi(s.c_str());
 		}
@@ -161,8 +158,6 @@ class NVSX : public NV
 			hsl = atoi(s.c_str());
 			getline(f2, s);
 			socon = atoi(s.c_str());
-			getline(f2, s);
-			lcb = atoi(s.c_str());
 			getline(f2, s);
 			sosp = atoi(s.c_str());
 		}
