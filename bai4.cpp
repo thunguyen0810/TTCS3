@@ -26,6 +26,22 @@ void DocFile(int a[],int b[],int c[])
 	f.close();
 }
 
+void XuatFile(int a[],int b[],int c[])
+{
+	f.open("dulieu.txt", ios::in);
+	cout << n << endl;
+	for(int i = 0; i < n; i++)
+		cout << a[i] << " ";
+	cout << endl;
+	for(int i = 0; i < n; i++)
+		cout << b[i] << " ";
+	cout << endl;
+	for(int i = 0; i < n; i++)
+		cout << c[i] << " ";
+	cout << endl;
+	f.close();
+}
+
 void SapXep(int a[], int b[], int c[])
 {
 	for(int i = 0; i < n - 1; i++)
@@ -103,6 +119,11 @@ int main()
 	int a[20], b[20], c[20];
 	
 	DocFile(a, b, c);
+	textcolor(10);
+	cout << "O to duoc giao sua chua" << endl;
+	textcolor(15);
+	XuatFile(a, b, c);
+	cout << endl;
 	
 	XepLich(a, b, c);
 	XuatThuTu();
