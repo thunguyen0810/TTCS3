@@ -56,14 +56,14 @@ void XepLich(int a[], int b[], int c[])
 	}
 	int dem = 0;
 	textcolor(10);
-	cout << "\t\tXe bi tre han : " << endl;
+	cout << "Xe bi tre han : " << endl;
 	textcolor(15);
 	for(int i = 1; i < n; i++)
 	{
 		if(c[i] != 0)
 		{
 			textcolor(11);
-			cout << "\t\t\t" << a[i];
+			cout << a[i];
 			textcolor(15);
 			dem ++;
 			f << endl << a[i];
@@ -82,7 +82,7 @@ void XuatThuTu()
 {
 	textcolor(10);
 	cout << endl;
-	cout << "\t\tThu tu sua chua oto dung han :" << endl;
+	cout << "Thu tu sua chua oto dung han :" << endl;
 	textcolor(15);
 	string s;
 	ifstream f("dulieu2.txt");
@@ -90,7 +90,7 @@ void XuatThuTu()
 	do
 	{
 		textcolor(11);
-		cout << "\t\t\t" << s << endl;
+		cout << s << endl;
 		textcolor(15);
 		getline(f, s);
 	}
