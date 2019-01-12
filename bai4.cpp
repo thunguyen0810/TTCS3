@@ -66,6 +66,7 @@ void XepLich(int a[], int b[], int c[])
 			cout << "\t\t\t" << a[i];
 			textcolor(15);
 			dem ++;
+			f << endl << a[i];
 		}
 	}
 	if(dem = 0)
