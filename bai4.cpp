@@ -4,6 +4,7 @@
 using namespace std;
 
 fstream f;
+int n;
 
 void textcolor(int x)
 {
@@ -15,16 +16,17 @@ void textcolor(int x)
 void DocFile(int a[],int b[],int c[])
 {
 	f.open("dulieu.txt", ios::in);
-	for(int i = 0; i < 5; i++)
+	f >> n;
+	for(int i = 0; i < n; i++)
 		f >> a[i];
-	for(int i = 0; i < 5; i++)
+	for(int i = 0; i < n; i++)
 		f >> b[i];
-	for(int i = 0; i < 5; i++)
+	for(int i = 0; i < n; i++)
 		f >> c[i];
 	f.close();
 }
 
-void SapXep(int a[], int b[], int c[], int n)
+void SapXep(int a[], int b[], int c[])
 {
 	for(int i = 0; i < n - 1; i++)
 		for(int j = i + 1; j < n; j++)
@@ -36,20 +38,41 @@ void SapXep(int a[], int b[], int c[], int n)
 			}
 }
 
-void XepLich(int a[], int b[], int c[], int n)
+void XepLich(int a[], int b[], int c[])
 {
 	f.open("dulieu2.txt", ios::out);
-	SapXep(a, b, c, 5);
+	SapXep(a, b, c);
 	int t = 0;
 	t = b[0];
 	f << a[0] << " ";
-	for(int i = 0; i < 5; i++)
+	for(int i = 0; i < n; i++)
 	{
 		if(c[i] >= t + b[i])
 		{
 			t += b[i];
 			f << a[i] << " ";
+			c[i] = 0;
 		}
+	}
+	int dem = 0;
+	textcolor(10);
+	cout << "\t\tXe bi tre han : " << endl;
+	textcolor(15);
+	for(int i = 1; i < n; i++)
+	{
+		if(c[i] != 0)
+		{
+			textcolor(11);
+			cout << "\t\t\t" << a[i];
+			textcolor(15);
+			dem ++;
+		}
+	}
+	if(dem = 0)
+	{
+		textcolor(11);
+		cout << "Khong co xe bi tre han";
+		textcolor(15);
 	}
 	f.close();
 }
@@ -57,6 +80,7 @@ void XepLich(int a[], int b[], int c[], int n)
 void XuatThuTu()
 {
 	textcolor(10);
+	cout << endl;
 	cout << "\t\tThu tu sua chua oto dung han :" << endl;
 	textcolor(15);
 	string s;
@@ -79,6 +103,6 @@ int main()
 	
 	DocFile(a, b, c);
 	
-	XepLich(a, b, c, 5);
+	XepLich(a, b, c);
 	XuatThuTu();
 }
