@@ -69,7 +69,7 @@ void XepLich(int a[], int b[], int c[])
 			f << endl << a[i];
 		}
 	}
-	if(dem = 0)
+	if(dem == 0)
 	{
 		textcolor(11);
 		cout << "Khong co xe bi tre han" << endl;;
