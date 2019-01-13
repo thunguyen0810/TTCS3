@@ -277,20 +277,28 @@ class NVSX : public NV
 	
 		void XuatNVSX1()
 		{
-			NV :: XuatNV2();
+			NV :: XuatNV1();
 			cout << "So san pham nhan vien san xuat lam duoc trong nam : " << sosp << endl;
+			cout << endl;
 			if(TinhThuong() != 0)
+			{
 				cout << "Tien thuong thang nay cua nhan vien san xuat : " << TinhThuong() << endl;
+				cout << endl;
+			}
 			if(TinhTroCap() != 0)
+			{
 				cout << "Tien tro cap thang nay cua nhan vien san xuat : " << TinhTroCap() << endl;
+				cout << endl;
+			}
 			cout << "Tien luong thang nay cua nhan vien san xuat : " << TinhLuong() << endl;
+			cout << endl;
 		}
 		
 		void XuatNVSX2()
 		{
 			NV :: XuatNV2();
 		
-			cout << "\t\t" <<sosp << "\t\t" << TinhThuong() << "\t\t" << TinhTroCap() << "\t\t" << TinhLuong() << endl;
+			cout << "\t\t" <<sosp << "\t\t" << TinhThuong() << "\t\t\t" << TinhTroCap() << "\t\t" << TinhLuong() << endl;
 			cout << endl;
 		} 
 };
@@ -467,11 +475,10 @@ int main()
 							nvsx.TinhLuong();
 							nvsx.TinhThuong1();
 							nvsx.TinhTroCap();
-							nvsx.XuatNV2();
 							nvsx.XuatNVSX1();
 							break;
 						case 2:
-							cout << "Ho ten nhan vien\t" << "Gioi tinh" << "\tNam vao lam" << "\tHe so luong" << "\tSo con" << "\tLuong co ban" << "\tTien thuong" << "\tSo san pham" << "\tTien thuong" << "\tTien tro cap" << "\tTien luong" << endl;
+							cout << "Ho ten nhan vien\t" << "Gioi tinh" << "\tNam vao lam" << "\tHe so luong" << "\tSo con" << "\tLuong co ban" << "\tTien thuong" << "\tSo san pham" << "\tTien thuong san pham" << "\tTien tro cap" << "\tTien luong" << endl;
 							sx.Nhapdssx();
 							sx.Xuatdssx();
 						case 3:
