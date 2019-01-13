@@ -4,6 +4,7 @@
 #include <stdlib.h>
 #include <vector>
 #include <Windows.h> 
+#include <conio.h>
 using namespace std;
 
 fstream f1 ("NVVP.txt");
@@ -94,7 +95,7 @@ class NVVP : public NV
 			getline(f1, s);
 			namvaolam = atoi(s.c_str());
 			getline(f1, s);
-			hsl = atoi(s.c_str());
+			hsl = strtof((s).c_str(), 0);
 			getline(f1, s);
 			socon = atoi(s.c_str());
 			getline(f1, s);
@@ -155,7 +156,7 @@ class NVSX : public NV
 			getline(f2, s);
 			namvaolam = atoi(s.c_str());
 			getline(f2, s);
-			hsl = atoi(s.c_str());
+			hsl = strtof((s).c_str(), 0);
 			getline(f2, s);
 			socon = atoi(s.c_str());
 			getline(f2, s);
