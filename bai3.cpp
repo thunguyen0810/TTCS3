@@ -4,7 +4,6 @@
 #include <stdlib.h>
 #include <vector>
 #include <Windows.h> 
-#include <conio.h>
 using namespace std;
 
 fstream f1 ("NVVP.txt");
@@ -15,6 +14,23 @@ const int giaphat = 50000;
 const int dinhmucsp = 200;
 const int dongiasp = 100000;
 const int lcb = 5000000;
+
+void SetWindow(int Width, int Height)
+{
+    _COORD coord;
+    coord.X = Width;
+    coord.Y = Height;
+ 
+    _SMALL_RECT Rect;
+    Rect.Top = 0;
+    Rect.Left = 0;
+    Rect.Bottom = Height - 1;
+    Rect.Right = Width - 1;
+ 
+    HANDLE Handle = GetStdHandle(STD_OUTPUT_HANDLE);      
+    SetConsoleScreenBufferSize(Handle, coord);            
+    SetConsoleWindowInfo(Handle, TRUE, &Rect);            
+} 
 
 void textcolor(int x)
 {
@@ -32,59 +48,27 @@ class NV
 		float hsl;
 		int socon;
 	
-		
-		void NhapNV()
+		void NhapNV1()
 		{
 			cout << "Nhap ten nhan vien : ";
 			cin >> hoten;
 			fflush(stdin);
+			cout << endl;
 			cout << "Nhap gioi tinh (Neu la nu nhap 1, nam nhap 0) : ";
 			cin >> gioitinh;
+			cout << endl;
 			cout << "Nhap nam vao lam : ";
 			cin >> namvaolam;
+			cout << endl;
 			cout << "Nhap he so luong : ";
 			cin >> hsl;
+			cout << endl;
 			cout << "Nhap so con : ";
 			cin >> socon;
-		}
-		
-		int TinhThuong()
-		{
-			int sonam = 2019 - namvaolam;
-			return sonam * 1000000;
-		}
-		
-		void XuatNV()
-		{
-			cout << "---------------------------------------------";
-			cout << endl;
-			cout << "Ho va ten nhan vien : " << hoten << endl;
-			if(gioitinh == 1)
-				cout << "Gioi tinh : Nu" << endl;
-			else
-			cout << "Gioi tinh : Nam" << endl;
-			cout << "Nam nhan vien vao lam : " << namvaolam << endl;
-			cout << "He so luong : " << hsl << endl;
-			cout << "So con : " << socon << endl;
-			cout << "Luong co ban : " << lcb << endl;
-			cout << "Tien thuong : " << TinhThuong() << endl;
-		}
-};
-
-class NVVP : public NV
-{
-	public:
-		int songayvang;
-		
-		void NhapVP()
-		{
-			NV :: NhapNV();
-			cout << "Nhap so ngay nhan vien vang : ";
-			cin >> songayvang ;
 			cout << endl;
 		}
 		
-		void NhapNVVP()
+		void NhapNV2()
 		{
 			string s;
 			
@@ -98,6 +82,93 @@ class NVVP : public NV
 			hsl = strtof((s).c_str(), 0);
 			getline(f1, s);
 			socon = atoi(s.c_str());
+		}
+		
+		void NhapNV3()
+		{
+			string s;
+			
+			getline(f2, s);
+			hoten = s;
+			getline(f2, s);
+			gioitinh = atoi(s.c_str());
+			getline(f2, s);
+			namvaolam = atoi(s.c_str());
+			getline(f2, s);
+			hsl = strtof((s).c_str(), 0);
+			getline(f2, s);
+			socon = atoi(s.c_str());
+		}
+		
+		int TinhThuong()
+		{
+			int sonam = 2019 - namvaolam;
+			return sonam * 1000000;
+		}
+		
+		void GioiTinh()
+		{
+			if(gioitinh == 1)
+				cout << "Nu";
+			else
+				cout << "Nam";
+		}
+		
+		void XuatNV1()
+		{
+			cout << "------------------------------**------------------------------";
+			cout << endl;
+			cout << "Ho va ten nhan vien : " << hoten << endl;
+			cout << endl;
+			if(gioitinh == 1)
+			{
+				cout << "Gioi tinh : Nu" << endl;
+				cout << endl;
+			}
+			else
+			{
+				cout << "Gioi tinh : Nam" << endl;
+				cout << endl;
+			}
+			cout << "Nam nhan vien vao lam : " << namvaolam << endl;
+			cout << endl;
+			cout << "He so luong : " << hsl << endl;
+			cout << endl;
+			cout << "So con : " << socon << endl;
+			cout << endl;
+			cout << "Luong co ban : " << lcb << endl;
+			cout << endl;
+			cout << "Tien thuong : " << TinhThuong() << endl;
+			cout << endl;
+		}
+		
+		void XuatNV2()
+		{
+			cout << hoten << "\t" ;
+			GioiTinh();
+			cout << "\t\t" << namvaolam << "\t\t" << hsl << "\t\t" << socon << "\t" << lcb << "\t\t" << TinhThuong();
+		}
+};
+
+class NVVP : public NV
+{
+	public:
+		int songayvang;
+
+		void NhapVP()
+		{
+			NV :: NhapNV1();
+			cout << "Nhap so ngay nhan vien vang : ";
+			cin >> songayvang ;
+			cout << endl;
+		}
+		
+		void NhapNVVP()
+		{
+			NV :: NhapNV2();
+			
+			string s;
+			
 			getline(f1, s);
 			songayvang = atoi(s.c_str());
 		}
@@ -121,16 +192,45 @@ class NVVP : public NV
 		int TinhLuong()
 		{
 			return lcb * hsl - TinhPhat();
-		}		
-		void XuatNVVP()
+		}
+		
+		int XuatPhat()
 		{
-			NV :: XuatNV();
-			cout << "So ngay nhan vien vang : " << songayvang << endl;
 			if(TinhPhat() != 0)
-				cout << "Tien bi phat thang nay : " << TinhPhat() << endl;
+				return TinhPhat();
+		}
+				
+		int XuatTroCap()
+		{
 			if(TinhTroCap() != 0)
+				return TinhTroCap();
+		}
+				
+		void XuatNVVP1()
+		{
+			NV :: XuatNV1();
+			cout << "So ngay nhan vien vang : " << songayvang << endl;
+			cout << endl;
+			if(TinhPhat() != 0)
+			{
+				cout << "Tien bi phat thang nay : " << TinhPhat() << endl;
+				cout << endl;
+			}
+			if(TinhTroCap() != 0)
+			{
 				cout << "Tien tro cap cua nhan vien van phong thang nay: " << TinhTroCap() << endl;
+				cout << endl;
+			}
 			cout << "Tien luong cua nhan vien van phong thang nay : " << TinhLuong() << endl;
+			cout << endl;
+		}
+				
+		int XuatNVVP2()
+		{
+			NV :: XuatNV2();
+		
+			cout << "\t" <<songayvang << "\t\t" << XuatPhat() << "\t\t" << XuatTroCap() << "\t\t" << TinhLuong() << endl;
+			cout << endl;
 		}
 };
 
@@ -138,27 +238,21 @@ class NVSX : public NV
 {
 	public:
 		int sosp;
+		
 		void NhapSX()
 		{
-			NV :: NhapNV();
+			NV :: NhapNV1();
 			cout << "Nhap so san pham nhan vien lam duoc trong thang nay : ";
 			cin >> sosp;
+			cout << endl;
 		}
 		
 		void NhapNVSX()
 		{
+			NV::NhapNV3();
+			
 			string s;
 			
-			getline(f2, s);
-			hoten = s;
-			getline(f2, s);
-			gioitinh = atoi(s.c_str());
-			getline(f2, s);
-			namvaolam = atoi(s.c_str());
-			getline(f2, s);
-			hsl = strtof((s).c_str(), 0);
-			getline(f2, s);
-			socon = atoi(s.c_str());
 			getline(f2, s);
 			sosp = atoi(s.c_str());
 		}
@@ -181,9 +275,9 @@ class NVSX : public NV
 			return (sosp * dongiasp) + TinhThuong();
 		}
 	
-		void XuatNVSX()
+		void XuatNVSX1()
 		{
-			NV :: XuatNV();
+			NV :: XuatNV2();
 			cout << "So san pham nhan vien san xuat lam duoc trong nam : " << sosp << endl;
 			if(TinhThuong() != 0)
 				cout << "Tien thuong thang nay cua nhan vien san xuat : " << TinhThuong() << endl;
@@ -191,6 +285,14 @@ class NVSX : public NV
 				cout << "Tien tro cap thang nay cua nhan vien san xuat : " << TinhTroCap() << endl;
 			cout << "Tien luong thang nay cua nhan vien san xuat : " << TinhLuong() << endl;
 		}
+		
+		void XuatNVSX2()
+		{
+			NV :: XuatNV2();
+		
+			cout << "\t\t" <<sosp << "\t\t" << TinhThuong() << "\t\t" << TinhTroCap() << "\t\t" << TinhLuong() << endl;
+			cout << endl;
+		} 
 };
 
 class DSNVVP : public NVVP
@@ -230,7 +332,7 @@ class DSNVVP : public NVVP
 		{
 			for (int i = 0; i < dsnvvp.size(); i++) 
 			{
-				dsnvvp[i].XuatNVVP();
+				dsnvvp[i].XuatNVVP2();
 			}
 			cout << "Luong trung binh cua nhan vien van phong : " << TinhLuongTB();
 		}		
@@ -265,7 +367,7 @@ class DSNVSX
 		{
 			for (int i = 0; i < dsnvsx.size(); i++) 
 			{
-				dsnvsx[i].XuatNVSX();
+				dsnvsx[i].XuatNVSX2();
 			}
 		}	
 };
@@ -275,10 +377,14 @@ int main()
 	int chon = 0;
 	int chon1 = 0;
 	int chon2 = 0;
+	int chon3 = 0;
 	DSNVVP vp;
 	DSNVSX sx;
 	NVVP nvvp;
 	NVSX nvsx;
+	
+	SetWindow(200, 100);
+	
 	do
 	{
 		Menu :
@@ -294,6 +400,7 @@ int main()
 			cout << "Ban chon chuc nang so : ";
 			textcolor(15);
 			cin >> chon;
+			cout << endl;
 		}
 	
 		switch(chon)
@@ -313,6 +420,7 @@ int main()
 					cout << "Ban chon chuc nang so : ";
 					textcolor(15);
 					cin >> chon1;
+					cout << endl;
 					switch(chon1)
 					{
 						case 1:
@@ -322,10 +430,10 @@ int main()
 							nvvp.TinhThuong();
 							nvvp.TinhPhat();
 							nvvp.TinhTroCap();
-							nvvp.XuatNV();
-							nvvp.XuatNVVP();
+							nvvp.XuatNVVP1();
 							break;
 						case 2:
+							cout << "Ho ten nhan vien\t" << "Gioi tinh" << "\tNam vao lam" << "\tHe so luong" << "\tSo con" << "\tLuong co ban" << "\tTien thuong" << "\tSo ngay vang" << "\tTien bi phat" << "\tTien tro cap" << "\tTien luong" << endl;
 							vp.Nhapdsvp();
 							vp.Xuatdsvp();
 							break;
@@ -350,6 +458,7 @@ int main()
 					cout << "Ban chon chuc nang so : ";
 					textcolor(15);
 					cin >> chon2;
+					cout << endl;
 					switch(chon2)
 					{
 						case 1:
@@ -358,10 +467,11 @@ int main()
 							nvsx.TinhLuong();
 							nvsx.TinhThuong1();
 							nvsx.TinhTroCap();
-							nvsx.XuatNV();
-							nvsx.XuatNVSX();
+							nvsx.XuatNV2();
+							nvsx.XuatNVSX1();
 							break;
 						case 2:
+							cout << "Ho ten nhan vien\t" << "Gioi tinh" << "\tNam vao lam" << "\tHe so luong" << "\tSo con" << "\tLuong co ban" << "\tTien thuong" << "\tSo san pham" << "\tTien thuong" << "\tTien tro cap" << "\tTien luong" << endl;
 							sx.Nhapdssx();
 							sx.Xuatdssx();
 						case 3:
